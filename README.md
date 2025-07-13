@@ -1,21 +1,40 @@
-# 🤖 AI DevOps Advisor Agent
+# 🤖 AI DevOps Advisor Assistant
 
-A terminal-based AI assistant that answers real-world DevOps and AWS questions.  
-It uses an LLM model (via OpenRouter API) to generate Terraform, Docker, CI/CD, and Cloud architecture solutions.
+A conversational AI assistant that answers technical questions on **AWS, Docker, CI/CD, and Terraform** — built with OpenRouter and deployed as a web app using **Streamlit**. Ask anything DevOps, and get code-based answers in real time!
 
----
-
-## 🔧 Features
-
-- DevOps Q&A: Ask about EC2, ECS, S3, IAM, CI/CD, and more
-- Code generation: Create Terraform files, IAM policies, Dockerfiles
-- Built-in system prompt to act like a professional DevOps engineer
-- Terminal-based — simple and fast to run
-- Lightweight — only Python + OpenRouter
+🌐 **Live Demo**: [Click to open app](https://ai-devops-advisor-dsdnvgcvhaqmmcyefbxxeq.streamlit.app/)
 
 ---
 
-## 🚀 How to Run
+## 📌 Features
+
+- 🔐 Securely integrates OpenAI-compatible APIs (via OpenRouter)
+- 💬 Chat interface for DevOps Q&A
+- ⚙️ Supports AWS, Docker, CI/CD pipelines, Terraform
+- 🌍 Deployed on Streamlit Cloud (free & public)
+- 🧠 Uses LLM model: `mistralai/mistral-7b-instruct`
+
+---
+
+## ⚙️ Technologies Used
+
+- Python
+- Streamlit
+- OpenRouter API
+- .env for secrets
+- GitHub for version control
+- VS Code & PowerShell
+
+---
+
+## 🚀 How to Run Locally
+
+### 1. Clone the Repo
+
+```bash
+git clone https://github.com/roshannkumar19/ai-devops-advisor.git
+cd ai-devops-advisor
+
 
 ### 1. Clone or Download This Project
 
