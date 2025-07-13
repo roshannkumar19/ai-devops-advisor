@@ -1,34 +1,52 @@
 import os
-import openai
-from dotenv import load_dotenv
 import streamlit as st
+from dotenv import load_dotenv
+from openai import OpenAI
 
 # Load environment variables
 load_dotenv()
-openai.api_key = os.getenv("OPENAI_API_KEY")
-openai.api_base = os.getenv("OPENAI_API_BASE")
 
+# Get keys from .env
+api_key = os.getenv("OPENAI_API_KEY")
+api_base = os.getenv("OPENAI_API_BASE")
+
+# Create client (NEW METHOD)
+client = OpenAI(
+    api_key=api_key,
+    base_url=api_base
+)
+
+# Function to ask AI
 def ask_agent(question):
     system_prompt = (
         "You are a professional DevOps assistant. "
         "Answer in detail with code examples for AWS, Docker, CI/CD, and Terraform."
     )
-    response = openai.ChatCompletion.create(
+
+    response = client.chat.completions.create(
         model="mistralai/mistral-7b-instruct",
         messages=[
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": question}
         ]
     )
-    return response.choices[0].message["content"]
 
-# Streamlit Web UI
-st.set_page_config(page_title="DevOps AI Assistant", page_icon="🧠")
-st.title("🤖 DevOps AI Assistant")
-st.write("Ask me anything about AWS, Docker, CI/CD, Terraform, etc.")
+    return response.choices[0].message.content
 
-user_input = st.text_input("💬 Ask a DevOps question:")
+# Streamlit UI
+st.set_page_config(page_title="DevOps AI Assistant", page_icon="🤖")
+st.title("🧠 DevOps AI Assistant")
+st.write("Ask me anything about AWS, Docker, Terraform, CI/CD...")
+
+# Text input
+user_input = st.text_input("Your Question:")
+
+# Handle response
 if user_input:
     with st.spinner("Thinking..."):
-        answer = ask_agent(user_input)
-        st.markdown(f"**🧠 AI:** {answer}")
+        try:
+            answer = ask_agent(user_input)
+            st.success("AI Answer:")
+            st.markdown(answer)
+        except Exception as e:
+            st.error(f"Something went wrong: {e}")
